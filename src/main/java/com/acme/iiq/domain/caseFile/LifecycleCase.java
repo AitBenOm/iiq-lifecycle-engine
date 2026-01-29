@@ -1,5 +1,6 @@
 package com.acme.iiq.domain.caseFile;
 
+import com.acme.iiq.domain.event.LifecycleEvent;
 import com.acme.iiq.domain.workItem.WorkItem;
 
 import java.time.Instant;
@@ -22,6 +23,16 @@ public final class LifecycleCase {
         this.caseType = Objects.requireNonNull(caseType);
         this.status = Objects.requireNonNull(status);
         this.createdAt = Objects.requireNonNull(createdAt);
+    }
+
+    public static LifecycleCase openFromEvent(LifecycleEvent event) {
+        return new LifecycleCase(
+                UUID.randomUUID(),
+                event.identityId(),
+                CaseType.from(event.type()),
+                CaseStatus.OPEN,
+                Instant.now()
+        );
     }
 
     public void addWorkItem(WorkItem item) {

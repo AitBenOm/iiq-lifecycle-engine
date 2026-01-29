@@ -17,7 +17,7 @@ public class WorkItem {
     private Instant decidedAt;
 
 
-    public WorkItem(UUID workItemId, String name, WorkItemStatus status, Decision decision, Instant decidedAt) {
+    public WorkItem(UUID workItemId, String name) {
         this.workItemId = Objects.requireNonNull(workItemId);
         this.name = Objects.requireNonNull(name);
         this.status = WorkItemStatus.PENDING;
